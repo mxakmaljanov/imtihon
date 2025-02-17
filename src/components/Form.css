@@ -1,0 +1,138 @@
+.job-form-container {
+  padding: 20px;
+  background-color: white;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.job-form-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: black; /* Qora rang */
+}
+
+.input-label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 16px;
+  color: black; /* Qora rang */
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.checkbox-group {
+  display: flex;
+  gap: 15px;
+}
+
+.checkbox-label {
+  font-size: 16px;
+  color: black; /* Qora rang */
+}
+
+.submit-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.cards-container {
+  margin-top: 30px;
+}
+
+.card {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 10px rgba(0, 255, 0, 0.2); /* Yashil shadow */
+}
+
+.card-header {
+  display: flex;
+  gap: 15px;
+}
+
+.card-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.company-name {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0;
+  color: black; /* Qora rang */
+}
+
+.position {
+  font-size: 16px;
+  margin: 0;
+  color: black; /* Qora rang */
+}
+
+.skills {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.skill {
+  background-color: #4CAF50;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: white; /* Oq rang */
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.edit-button,
+.delete-button {
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.edit-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.badge {
+  font-size: 14px;
+  background-color: #ff9800;
+  padding: 3px 8px;
+  border-radius: 5px;
+  color: white;
+  margin-left: 5px;
+}
