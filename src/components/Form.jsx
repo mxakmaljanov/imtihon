@@ -1,152 +1,137 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Form.css';
 
- function Form() {
-  const [form, setForm] = useState({
-    logoUrl: '',
-    companyName: '',
-    position: '',
-    isNew: false,
-    isFeatured: false,
-    time: '',
-    jobType: '',
-    location: '',
-    skills: [],
+function Form() {
+  const [urlimg, setUrl] = useState('');
+  const [conpanie, setConpanie] = useState('');
+  const [lavozim, setLavozim] = useState('');
+  const [timeAgo, setTimeAgo] = useState('');
+  const [employmentType, setEmploymentType] = useState('');
+  const [location, setLocation] = useState('');
+  const [newChecked, setNewChecked] = useState(false);
+  const [featuredChecked, setFeaturedChecked] = useState(false);
+  const [skills, setSkills] = useState({
+    fullstack: false,
+    python: false,
+    midweight: false,
+    react: false
   });
+  const [card, setCard] = useState([]);
+  const [darkMode, setDarkMode] = useState(false); 
 
-  const handleChange = (field, value) => {
-    setForm({ ...form, [field]: value });
-  };
+  useEffect(() => {
+    const savedCards = JSON.parse(localStorage.getItem('cards')) || [];
+    setCard(savedCards);
+  }, []);
 
-  const handleCheckboxChange = (field) => {
-    setForm({ ...form, [field]: !form[field] });
-  };
+  useEffect(() => {
+    localStorage.setItem('cards', JSON.stringify(card));
+  }, [card]);
 
-  const handleSkillChange = (skill) => {
-    setForm((prev) => ({
-      ...prev,
-      skills: prev.skills.includes(skill)
-        ? prev.skills.filter((s) => s !== skill)
-        : [...prev.skills, skill],
-    }));
-  };
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      setDarkMode(true);
+    }
+  }, []);
 
-  const handleSubmit = () => {
-    console.log('Form data:', form);
-    localStorage.setItem('jobFormData', JSON.stringify(form)); 
-  };
+  function handleSave(event) {
+    event.preventDefault();
+    const cardd = {
+      urlimg,
+      conpanie,
+      lavozim,
+      skills,
+      timeAgo,
+      employmentType,
+      location,
+      newChecked,
+      featuredChecked,
+      id: Date.now()
+    };
+
+    setCard(prevCards => [...prevCards, cardd]);
+    setUrl('');
+    setConpanie('');
+    setLavozim('');
+    setSkills({ fullstack: false, python: false, midweight: false, react: false });
+    setTimeAgo('');
+    setEmploymentType('');
+    setLocation('');
+    setNewChecked(false);
+    setFeaturedChecked(false);
+  }
+
+  function handleDelete(id) {
+    setCard(card.filter(cardItem => cardItem.id !== id));
+  }
+
+  function handleEdit(id) {
+    const cardToEdit = card.find(cardItem => cardItem.id === id);
+    if (cardToEdit) {
+      setUrl(cardToEdit.urlimg);
+      setConpanie(cardToEdit.conpanie);
+      setLavozim(cardToEdit.lavozim);
+      setSkills(cardToEdit.skills);
+      setTimeAgo(cardToEdit.timeAgo);
+      setEmploymentType(cardToEdit.employmentType);
+      setLocation(cardToEdit.location);
+      setNewChecked(cardToEdit.newChecked);
+      setFeaturedChecked(cardToEdit.featuredChecked);
+      handleDelete(id);
+    }
+  }
+
+  function toggleTheme() {
+    setDarkMode(!darkMode);
+    localStorage.setItem('theme', darkMode ? 'light' : 'dark');
+  }
 
   return (
-    <div className="job-form-container">
-      <h2 className="job-form-title">Vakansiya ma'lumotlarini kiriting</h2>
-
-      <label className="input-label">Logotip URL</label>
-      <input
-        type="text"
-        placeholder="Logotip URL manzilini kiriting"
-        value={form.logoUrl}
-        onChange={(e) => handleChange('logoUrl', e.target.value)}
-        className="input-field"
-      />
-
-      <label className="input-label">Kompaniya nomi</label>
-      <input
-        type="text"
-        placeholder='Kompaniya nomini kiriting'
-        className="input-field"
-      />
-
-      <div className="checkbox-group">
-        <label className="checkbox-label">
-          <input
-            type="checkbox"
-            checked={form.isNew}
-            onChange={() => handleCheckboxChange('isNew')}
-          />
-          Yangi
-        </label>
-        <label className="checkbox-label">
-          <input
-            type="checkbox"
-            checked={form.isFeatured}
-            onChange={() => handleCheckboxChange('isFeatured')}
-          />
-          Featured
-        </label>
-      </div>
-
-      <label className="input-label">Lavozim</label>
-      <input
-        type="text"
-        placeholder='Lavozimingizni kiriting...!'
-        className="input-field"
-      />
-
-      <div className="select-group">
-        <select onChange={(e) => handleChange('time', e.target.value)} className="select-field">
-          <option value="">Tanlang</option>
-          <option value="full-time">Full-time</option>
-          <option value="part-time">Part-time</option>
-        </select>
-
-        <select onChange={(e) => handleChange('jobType', e.target.value)} className="select-field">
-          <option value="">Tanlang</option>
-          <option value="remote">Remote</option>
-          <option value="on-site">On-site</option>
-        </select>
-
-        <select onChange={(e) => handleChange('location', e.target.value)} className="select-field">
-          <option value="">Tanlang</option>
-          <option value="tashkent">Toshkent</option>
-          <option value="namangan">Namangan</option>
-        </select>
-      </div>
-
-      <label className="input-label">Ko'nikmalar</label>
-      <div className="skills-group">
-        {['Fullstack', 'Python', 'Midweight', 'React'].map((skill) => (
-          <label key={skill} className="checkbox-label">
-            <input
-              type="checkbox"
-              checked={form.skills.includes(skill)}
-              onChange={() => handleSkillChange(skill)}
-            />
-            {skill}
-          </label>
-        ))}
-      </div>
-
-      <button className="submit-button" onClick={handleSubmit}>
-        Saqlash
-      </button>
-    </div>
-  );
-}
-
-export function JobCard({ job }) {
-  return (
-    <div className="card">
-      <div className="card-header">
-        <img src={job.logoUrl} alt="logo" className="card-logo" />
-        <div className="card-info">
-          <h3 className="company-name">{job.companyName} {job.isNew && <span className="badge">New</span>} {job.isFeatured && <span className="badge">Featured</span>}</h3>
-          <p className="position">{job.position}</p>
+    <div className={`container ${darkMode ? 'dark' : 'light'}`}>
+      <header>
+        <button className='darkMod' onClick={toggleTheme}>
+          {darkMode ? 'Light Mode' : 'Dark Mode'}
+        </button>
+      </header>
+      <div className='content'>
+        <div className='form'>
+          <form>
+            <h2>Vakansiya ma'lumotlarini kiriting</h2>
+            <label>Logotip URL</label><br />
+            <input value={urlimg} onChange={(e) => setUrl(e.target.value)} className='input' type='url' placeholder='Logotip URL manzilini kiriting' /><br />
+            <label>Konpaniya nomi</label><br />
+            <input value={conpanie} onChange={(e) => setConpanie(e.target.value)} className='input' type='text' placeholder='Manage' />
+            <div className='chakked'>
+              <label>NEW</label>
+              <input type='checkbox' checked={newChecked} onChange={() => setNewChecked(!newChecked)} />
+              <label>FEATURED</label>
+              <input type='checkbox' checked={featuredChecked} onChange={() => setFeaturedChecked(!featuredChecked)} />
+            </div>
+            <label>Lavozimi</label>
+            <input value={lavozim} onChange={(e) => setLavozim(e.target.value)} className='input' type='text' placeholder='Fullstack Developer' />
+            <div className='selects'>
+              <select onChange={(e) => setTimeAgo(e.target.value)}>
+                <option value='1d ago'>1d ago</option>
+                <option value='2d ago'>2d ago</option>
+                <option value='1h ago'>1h ago</option>
+                <option value='2h ago'>2h ago</option>
+              </select>
+              <select onChange={(e) => setEmploymentType(e.target.value)}>
+                <option value='Full Time'>Full Time</option>
+                <option value='Part Time'>Part Time</option>
+              </select>
+              <select onChange={(e) => setLocation(e.target.value)}>
+                <option value='Worldwide'>Worldwide</option>
+                <option value='Boshqa'>Boshqa</option>
+              </select>
+            </div>
+            <button className='seve' onClick={handleSave}>Saqlash</button>
+          </form>
         </div>
       </div>
-
-      <div className="skills">
-        {job.skills.map((skill, index) => (
-          <div key={index} className="skill">
-            {skill}
-          </div>
-        ))}
-      </div>
-
-      <div className="card-actions">
-        <button className="edit-button">Tahrirlash</button>
-        <button className="delete-button">O'chirish</button>
-      </div>
     </div>
   );
 }
+
 export default Form;

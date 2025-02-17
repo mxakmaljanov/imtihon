@@ -1,138 +1,219 @@
-.job-form-container {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
-  background-color: white;
-  max-width: 600px;
-  margin: 0 auto;
+  background-color: #f5f6f7;
 }
 
-.job-form-title {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: black; /* Qora rang */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
 }
 
-.input-label {
-  display: block;
-  margin: 10px 0 5px;
-  font-size: 16px;
-  color: black; /* Qora rang */
+.darkMod {
+  background-color: black;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
-.input-field {
+.content {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.form {
+  width: 100%;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form h2 {
+  margin-bottom: 15px;
+}
+
+.input {
   width: 100%;
   padding: 10px;
-  font-size: 16px;
-  margin-bottom: 15px;
+  margin-top: 5px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.checkbox-group {
+.chakked {
   display: flex;
-  gap: 15px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
-.checkbox-label {
-  font-size: 16px;
-  color: black; /* Qora rang */
+.selects select {
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-.submit-button {
-  background-color: #4CAF50;
+.chak {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chak input {
+  margin-left: 5px;
+}
+
+.seve {
+  background-color: #5ba4a4;
   color: white;
-  padding: 10px;
-  font-size: 16px;
+  padding: 10px 20px;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.cards-container {
-  margin-top: 30px;
+.cards {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 800px;
 }
 
 .card {
   display: flex;
-  gap: 15px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 10px rgba(0, 255, 0, 0.2); /* Yashil shadow */
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(91, 164, 164, 0.6);
+  margin-bottom: 15px;
+  border-left: 5px solid #5ba4a4;
 }
 
-.card-header {
+.cardRight {
   display: flex;
+  align-items: center;
   gap: 15px;
 }
 
-.card-logo {
-  width: 80px;
-  height: 80px;
+.URLimg {
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  object-fit: cover;
 }
 
-.card-info {
+.title {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
-.company-name {
+.title p {
+  background-color: #5ba4a4;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
   font-weight: bold;
-  font-size: 18px;
-  margin: 0;
-  color: black; /* Qora rang */
 }
 
-.position {
-  font-size: 16px;
-  margin: 0;
-  color: black; /* Qora rang */
+.title .t {
+  background-color: black;
 }
 
-.skills {
+.cardLeft {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.buttons {
   display: flex;
   gap: 10px;
-  margin-top: 10px;
 }
 
-.skill {
-  background-color: #4CAF50;
+.buttons li {
+  background-color: #eef6f6;
+  color: #5ba4a4;
   padding: 5px 10px;
   border-radius: 5px;
-  font-size: 14px;
-  color: white; /* Oq rang */
+  font-weight: bold;
 }
 
-.card-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.edit-button,
-.delete-button {
-  padding: 10px;
-  font-size: 14px;
+.delete, .edit {
+  background-color: #5ba4a4;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.edit-button {
-  background-color: #4CAF50;
+.delete {
+  background-color: red;
+}
+.light {
+  background-color: #f5f6f7;
+  color: black;
+}
+
+.dark {
+  background-color: #121212;
   color: white;
 }
 
-.delete-button {
-  background-color: #f44336;
+.dark .form {
+  background-color: #1e1e1e;
+  color: white;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark .input, .dark select {
+  background-color: #2c2c2c;
+  color: white;
+  border: 1px solid #555;
+}
+
+.dark .seve {
+  background-color: #5ba4a4;
   color: white;
 }
 
-.badge {
-  font-size: 14px;
-  background-color: #ff9800;
-  padding: 3px 8px;
-  border-radius: 5px;
+.dark .card {
+  background-color: #1e1e1e;
   color: white;
-  margin-left: 5px;
+  box-shadow: 0 0 8px rgba(91, 164, 164, 0.6);
+  border-left: 5px solid #5ba4a4;
+}
+
+.dark .delete {
+  background-color: red;
+}
+
+.dark .edit {
+  background-color: #5ba4a4;
+}
+
+.dark .darkMod {
+  background-color: white;
+  color: black;
 }
